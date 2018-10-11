@@ -173,9 +173,8 @@ Clover provider the cloverctl and clover-controller to controll the server. So w
 Docker Registry
 :::::::::::::::
 
-You need a configuration file written in YAML that describe the information about you docker registry just like the docker.yml
+You need a configuration file written in YAML that describe the information about you docker registry just like the docker.yml::
 
-```yaml
   name: dockerhub
   address: https://index.docker.io
   username: myuser
@@ -198,15 +197,15 @@ Kubernetes
 
 By default, installing the manifest only registers the local cluster as a deploy target for Spinnaker. If you want to add arbitrary clusters you can use the cloverctl commands
 
-You need a running Kubernetes cluster, with corresponding credentials in a kubeconfig file(/path/to/kubeconfig). And You also need a configuration file written in YAML that describe the information about you kubernetes cluseter just like the kubernetes.yml
+You need a running Kubernetes cluster, with corresponding credentials in a kubeconfig file(/path/to/kubeconfig). And You also need a configuration file written in YAML that describe the information about you kubernetes cluseter just like the kubernetes.yml::
 
-# name must match pattern ^[a-z0-9]+([-a-z0-9]*[a-z0-9])?$'
-name: my-kubernetes
-providerVersion: V1
-# make sure the kubeconfigFile can be use
-kubeconfigFile: /path/to/kubeconfig
-dockerRegistries:
-- accountName: dockerhub
+  # name must match pattern ^[a-z0-9]+([-a-z0-9]*[a-z0-9])?$'
+  name: my-kubernetes
+  providerVersion: V1
+  # make sure the kubeconfigFile can be use
+  kubeconfigFile: /path/to/kubeconfig
+  dockerRegistries:
+  - accountName: dockerhub
 
 .. code-block:: bash
     $ cloverctl create provider kubernetes -f kubernetes.yml
