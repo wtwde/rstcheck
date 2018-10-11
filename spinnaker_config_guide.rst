@@ -137,7 +137,7 @@ The listing below must include the following Envoy filter:
     spin-redis         ClusterIP   10.233.20.95    <none>        6379/TCP         22h
     spin-rosco         ClusterIP   10.233.48.79    <none>        8087/TCP         22h
 
-In your browser, navigate to the following URLs for Jaeger and Prometheus respectively::
+In your browser, navigate to the following URLs for Spinnaker respectively::
 
     http://<node IP>:31747
 
@@ -148,16 +148,24 @@ Where node IP is an IP from one of the Kubernetes cluster node(s).
      :scale: 100%
 
 Spinnaker Configuration
-==========================
+=======================
 
-Adding Kubernetes Clusters to Spinnaker
----------------------------------------
+When the default installation is ready, there are many different components that you can turn on with Spinnaker. In order to customize Spinnaker, you can use the halyard command line or clover command line to edit the configuration and apply it to what has already been deployed.
+
+Halyard Command
+---------------
+
+Halyard has an in-cluster daemon that stores your configuration. You can exec a shell in this pod to make and apply your changes.
+For example:
+
+.. code-block:: bash
+
+    $ kubectl exec spin-halyard -n spinnaker -it -- bash -il
+    spinnaker@spin-halyard:/workdir$ hal version list
+
+How to use the halyard command line to configurate the spinnaker please refer to https://www.spinnaker.io/reference/halyard/commands/
+
+Clover Command
+--------------
 
 By default, installing the manifest only registers the local cluster as a deploy target for Spinnaker. If you want to add arbitrary clusters need to do the following:
-
-
-Alert logging
--------------
-
-CRS Rules
----------
