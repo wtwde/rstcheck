@@ -42,8 +42,7 @@ The following assumptions must be met before continuing on to deployment:
  * Ubuntu 16.04 was used heavily for development and is advised for greenfield deployments.
  * Installation of Docker has already been performed. It's preferable to install Docker CE.
  * Installation of Kubernetes has already been performed.
- * A PersistentVolume resource be setup in k8s for the PersistentVolumeClaim to use.
-   we supply the `manifest file minio-pv.yml <https://github.com/opnfv/clover/blob/master/clover/spinnaker/install/quick-install-spinnaker.yml>`_ to create the PV, But it is not suitable for use in production.
+ * A PersistentVolume resource need to be setup in k8s for the PersistentVolumeClaim to use. we supply the `manifest file minio-pv.yml <https://github.com/opnfv/clover/blob/master/clover/spinnaker/install/minio-pv.yml>`_ to create the PV, But it is not suitable for use in production.
 
 
 Deploy from source
@@ -58,7 +57,7 @@ shown below:
     $ cd clover/clover/spinnaker/install
     $ git checkout stable/gambia
 
-To deploy the ModSecurity WAF in the "clover-gateway" Kubernetes namespace, use
+To deploy the Spinnaker in the "spinnaker" Kubernetes namespace, use
 the following command:
 
 .. code-block:: bash
@@ -169,4 +168,53 @@ How to use the halyard command line to configurate the spinnaker please refer to
 Clover Command
 --------------
 
-By default, installing the manifest only registers the local cluster as a deploy target for Spinnaker. If you want to add arbitrary clusters need to do the following:
+Clover provider the cloverctl and clover-controller to controll the server. So we can use the cloverctl to configurate the spinnaker. So far clover command can create/get/delete docker-registry and kubernetes in spinnaker.
+
+Docker Registry
+:::::::::::::::
+
+You need a configuration file written in YAML that describe the information about you docker registry just like the docker.yml
+
+name: dockerhub
+address: https://index.docker.io
+username: myuser
+password: mypasswd
+repositories:
+- opnfv/clover
+
+.. code-block:: bash
+    $ cloverctl create provider docker-registry -f docker.yml
+
+
+.. code-block:: bash
+    $ cloverctl get provider docker-registry
+
+.. code-block:: bash
+    $ cloverctl delete provider docker-registry -n dockerhub
+
+Kubernetes
+::::::::::
+
+By default, installing the manifest only registers the local cluster as a deploy target for Spinnaker. If you want to add arbitrary clusters you can use the cloverctl commands
+
+You need a running Kubernetes cluster, with corresponding credentials in a kubeconfig file(/path/to/kubeconfig). And You also need a configuration file written in YAML that describe the information about you kubernetes cluseter just like the kubernetes.yml
+
+# name must match pattern ^[a-z0-9]+([-a-z0-9]*[a-z0-9])?$'
+name: my-kubernetes
+providerVersion: V1
+# make sure the kubeconfigFile can be use
+kubeconfigFile: /path/to/kubeconfig
+dockerRegistries:
+- accountName: dockerhub
+
+.. code-block:: bash
+    $ cloverctl create provider kubernetes -f kubernetes.yml
+
+get the kubernetes provider in spinnaker
+.. code-block:: bash
+    $ cloverctl get provider kubernetes
+
+Delete the kubernetes provider in spinnaker
+.. code-block:: bash
+    $ cloverctl delete provider kubernetes -n my-kubernetes
+
