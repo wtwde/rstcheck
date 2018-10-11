@@ -9,8 +9,7 @@
 Spinnaker Configuration Guide
 =========================================
 
-This document provides a guide to setup the spinnaker in kubernetes
-as a continuous delivery platform.
+This document provides a guide to setup the spinnaker in kubernetes as a continuous delivery platform.
 
 
 Spinnaker Overview
@@ -42,14 +41,13 @@ The following assumptions must be met before continuing on to deployment:
  * Ubuntu 16.04 was used heavily for development and is advised for greenfield deployments.
  * Installation of Docker has already been performed. It's preferable to install Docker CE.
  * Installation of Kubernetes has already been performed.
- * A PersistentVolume resource need to be setup in k8s for the PersistentVolumeClaim to use. we supply the `manifest file minio-pv.yml <https://github.com/opnfv/clover/blob/master/clover/spinnaker/install/minio-pv.yml>`_ to create the PV, But it is not suitable for use in production.
+ * A PersistentVolume resource need to be setup in k8s for the PersistentVolumeClaim to use. we supply the manifest file `minio-pv.yml <https://github.com/opnfv/clover/blob/master/clover/spinnaker/install/minio-pv.yml>`_ to create the PV, But it is not suitable for use in production.
 
 
 Deploy from source
 ------------------
 
-Clone the Clover git repository and navigate within the samples directory as
-shown below:
+Clone the Clover git repository and navigate within the samples directory as shown below:
 
 .. code-block:: bash
 
@@ -57,8 +55,7 @@ shown below:
     $ cd clover/clover/spinnaker/install
     $ git checkout stable/gambia
 
-To deploy the Spinnaker in the "spinnaker" Kubernetes namespace, use
-the following command:
+To deploy the Spinnaker in the "spinnaker" Kubernetes namespace, use the following command:
 
 .. code-block:: bash
 
@@ -118,8 +115,9 @@ To publish the spin-deck service, we need change the type to NodePort, executing
 .. code-block:: bash
 
     $ kubectl get svc spin-deck -n spinnaker -o yaml |sed 's/ClusterIP/NodePort/' |kubectl replace -f -
+    $ kubectl get svc -n spinnaker
 
-The listing below must include the following Envoy filter:
+The listing below must include the following services
 
 .. code-block:: bash
 
@@ -168,33 +166,37 @@ How to use the halyard command line to configurate the spinnaker please refer to
 Clover Command
 --------------
 
-Clover provider the cloverctl and clover-controller to controll the server. So we can use the cloverctl to configurate the spinnaker. So far clover command can create/get/delete docker-registry and kubernetes in spinnaker.
+Clover provider the cloverctl and clover-controller to controll the server. So we can use the cloverctl to configurate the spinnaker. So far, clover command can create/get/delete docker-registry and kubernetes provider in spinnaker.
+
+**NOTE:** Before using clover command, you need build the clover command and setup the clover-controller in your local kubernetes cluster, where spinnaker deploy in.
 
 Docker Registry
 :::::::::::::::
 
-You need a configuration file written in YAML that describe the information about you docker registry just like the docker.yml::
+You need a configuration file written in YAML that describe the information about you Docker Registry just like the docker.yml::
 
   name: dockerhub
   address: https://index.docker.io
-  username: myuser
-  password: mypasswd
+  username: if-you-images-aren't-publicly-available
+  password: fill-this-field
   repositories:
   - opnfv/clover
 
-Create the Docker Registry in spinnaker, executing the command below:
+If any of your images aren’t publicly available, you need fill your DockerHub username & password. Ortherwise you can delete the username & password field.
+
+Creating the Docker Registry in spinnaker:
 
 .. code-block:: bash
 
     $ cloverctl create provider docker-registry -f docker.yml
 
-Get the Docker Registry in spinnaker, executing the command below:
+Getting the Docker Registry in spinnaker:
 
 .. code-block:: bash
 
     $ cloverctl get provider docker-registry
 
-Delete the Docker Registry in spinnaker, executing the command below:
+Deleting the Docker Registry in spinnaker:
 
 .. code-block:: bash
 
@@ -203,9 +205,9 @@ Delete the Docker Registry in spinnaker, executing the command below:
 Kubernetes
 ::::::::::
 
-By default, installing the manifest only registers the local cluster as a deploy target for Spinnaker. If you want to add arbitrary clusters you can use the cloverctl commands
+By default, installing the manifest only registers the local cluster as a deploy target for Spinnaker. If you want to add arbitrary clusters you can use the cloverctl command
 
-You need a running Kubernetes cluster, with corresponding credentials in a kubeconfig file(/path/to/kubeconfig). And You also need a configuration file written in YAML that describe the information about you kubernetes cluseter just like the kubernetes.yml::
+You need a running Kubernetes cluster, with corresponding credentials in a kubeconfig file(/path/to/kubeconfig). And You also need a configuration file written in YAML that describe the information about your kubernetes cluseter just like the kubernetes.yml::
 
   # name must match pattern ^[a-z0-9]+([-a-z0-9]*[a-z0-9])?$'
   name: my-kubernetes
@@ -215,21 +217,20 @@ You need a running Kubernetes cluster, with corresponding credentials in a kubec
   dockerRegistries:
   - accountName: dockerhub
 
-Create the kubernetes provider in spinnaker, executing the command below:
+Creating the kubernetes provider in spinnaker:
 
 .. code-block:: bash
 
     $ cloverctl create provider kubernetes -f kubernetes.yml
 
-Get the kubernetes provider in spinnaker, executing the command below:
+Getting the kubernetes provider in spinnaker:
 
 .. code-block:: bash
 
     $ cloverctl get provider kubernetes
 
-Delete the kubernetes provider in spinnaker, executing the command below:
+Deleting the kubernetes provider in spinnaker:
 
 .. code-block:: bash
 
     $ cloverctl delete provider kubernetes -n my-kubernetes
-
