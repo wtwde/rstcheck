@@ -182,12 +182,17 @@ You need a configuration file written in YAML that describe the information abou
   repositories:
   - opnfv/clover
 
+create
+
 .. code-block:: bash
     $ cloverctl create provider docker-registry -f docker.yml
 
+get
 
 .. code-block:: bash
     $ cloverctl get provider docker-registry
+
+delete
 
 .. code-block:: bash
     $ cloverctl delete provider docker-registry -n dockerhub
@@ -207,14 +212,18 @@ You need a running Kubernetes cluster, with corresponding credentials in a kubec
   dockerRegistries:
   - accountName: dockerhub
 
+create
+
 .. code-block:: bash
     $ cloverctl create provider kubernetes -f kubernetes.yml
 
 get the kubernetes provider in spinnaker
+
 .. code-block:: bash
     $ cloverctl get provider kubernetes
 
 Delete the kubernetes provider in spinnaker
+
 .. code-block:: bash
     $ cloverctl delete provider kubernetes -n my-kubernetes
 
