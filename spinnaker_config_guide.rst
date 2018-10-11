@@ -176,6 +176,7 @@ Docker Registry
 You need a configuration file written in YAML that describe the information about you Docker Registry as shown below:
 
 docker.yml::
+
   name: mydockerhub
   address: https://index.docker.io
   username: if-you-images-aren't-publicly-available
