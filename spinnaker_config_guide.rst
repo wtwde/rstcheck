@@ -175,12 +175,13 @@ Docker Registry
 
 You need a configuration file written in YAML that describe the information about you docker registry just like the docker.yml
 
-name: dockerhub
-address: https://index.docker.io
-username: myuser
-password: mypasswd
-repositories:
-- opnfv/clover
+```yaml
+  name: dockerhub
+  address: https://index.docker.io
+  username: myuser
+  password: mypasswd
+  repositories:
+  - opnfv/clover
 
 .. code-block:: bash
     $ cloverctl create provider docker-registry -f docker.yml
