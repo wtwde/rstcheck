@@ -43,7 +43,7 @@ The following assumptions must be met before continuing on to deployment:
  * Installation of Docker has already been performed. It's preferable to install Docker CE.
  * Installation of Kubernetes has already been performed.
  * A PersistentVolume resource be setup in k8s for the PersistentVolumeClaim to use.
-   we supply the file to create the PV, But it is not suitable for use in production.
+   we supply the `manifest file minio-pv.yml <https://github.com/opnfv/clover/blob/master/clover/spinnaker/install/quick-install-spinnaker.yml>`_ to create the PV, But it is not suitable for use in production.
 
 
 Deploy from source
