@@ -161,21 +161,22 @@ For example:
     $ kubectl exec spin-halyard -n spinnaker -it -- bash -il
     spinnaker@spin-halyard:/workdir$ hal version list
 
-How to use the halyard command line to configurate the spinnaker please refer to `command documentation <https://www.spinnaker.io/reference/halyard/commands/>`_.
+How to use the halyard command line to configurate the spinnaker, please refer to `commands documentation <https://www.spinnaker.io/reference/halyard/commands/>`_.
 
 Clover Command
 --------------
 
-Clover provider the cloverctl and clover-controller to controll the server. So we can use the cloverctl to configurate the spinnaker. So far, clover command can create/get/delete docker-registry and kubernetes provider in spinnaker.
+Clover provider the cloverctl and clover-controller to controll the server. So we can use the cloverctl to configurate the spinnaker. So far, clover provide the capabilities to create/get/delete docker-registry and kubernetes provider in spinnaker.
 
 **NOTE:** Before using clover command, you need build the clover command and setup the clover-controller in your local kubernetes cluster, where spinnaker deploy in.
 
 Docker Registry
 :::::::::::::::
 
-You need a configuration file written in YAML that describe the information about you Docker Registry just like the docker.yml::
+You need a configuration file written in YAML that describe the information about you Docker Registry as shown below:
 
-  name: dockerhub
+docker.yml::
+  name: mydockerhub
   address: https://index.docker.io
   username: if-you-images-aren't-publicly-available
   password: fill-this-field
@@ -207,7 +208,9 @@ Kubernetes
 
 By default, installing the manifest only registers the local cluster as a deploy target for Spinnaker. If you want to add arbitrary clusters you can use the cloverctl command
 
-You need a running Kubernetes cluster, with corresponding credentials in a kubeconfig file(/path/to/kubeconfig). And You also need a configuration file written in YAML that describe the information about your kubernetes cluseter just like the kubernetes.yml::
+You need a running Kubernetes cluster, with corresponding credentials in a kubeconfig file(/path/to/kubeconfig). And You also need a configuration file written in YAML that describe the information about your kubernetes cluseter as shown below:
+
+kubernetes.yml::
 
   # name must match pattern ^[a-z0-9]+([-a-z0-9]*[a-z0-9])?$'
   name: my-kubernetes
