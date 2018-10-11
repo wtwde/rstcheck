@@ -28,7 +28,7 @@ Spinnaker provides two core sets of features:
 
     You use Spinnaker’s application deployment features to construct and manage continuous delivery workflows.
 
-For more information on Spinnaker and its capabilities, please refer to `documation <https://www.spinnaker.io/>`_.
+For more information on Spinnaker and its capabilities, please refer to `documentation <https://www.spinnaker.io/>`_.
 
 
 Setup Spinnaker
@@ -163,7 +163,7 @@ For example:
     $ kubectl exec spin-halyard -n spinnaker -it -- bash -il
     spinnaker@spin-halyard:/workdir$ hal version list
 
-How to use the halyard command line to configurate the spinnaker please refer to https://www.spinnaker.io/reference/halyard/commands/
+How to use the halyard command line to configurate the spinnaker please refer to `command documentation <https://www.spinnaker.io/reference/halyard/commands/>`_.
 
 Clover Command
 --------------
