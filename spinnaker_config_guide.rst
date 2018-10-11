@@ -20,15 +20,15 @@ Spinnaker is an open-source, multi-cloud continuous delivery platform that helps
 
 Spinnaker provides two core sets of features:
 
-**application management**::
+**1. application management**
 
     You use Spinnaker’s application management features to view and manage your cloud resources.
 
-**application deployment**::
+**2. application deployment**
 
     You use Spinnaker’s application deployment features to construct and manage continuous delivery workflows.
 
-For more information on Spinnaker and its capabilities, please refer to https://www.spinnaker.io/
+For more information on Spinnaker and its capabilities, please refer to `documation <https://www.spinnaker.io/>`_.
 
 
 Setup Spinnaker
