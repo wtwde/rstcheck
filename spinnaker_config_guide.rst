@@ -156,6 +156,7 @@ Halyard Command
 ---------------
 
 Halyard has an in-cluster daemon that stores your configuration. You can exec a shell in this pod to make and apply your changes.
+
 For example:
 
 .. code-block:: bash
