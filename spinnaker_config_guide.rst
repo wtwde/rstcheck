@@ -249,7 +249,7 @@ Currently, spinnaker support to deploy applications with the helm chart. More in
 Upload helm charts to artifacts
 -------------------------------
 
-Before doing this, please package the helm chart first.
+Before doing this, please package the helm chart first. how to package the chart, refer to `helm documentation <https://docs.helm.sh/helm/#helm_package>`_.
 
 .. code-block:: bash
 
@@ -270,11 +270,13 @@ Configuration stage
 :::::::::::::::::::
 
 We can configure Automated triggers and expected artifacts in this stage.
-We just declare expected artifacts and will trigger the pipeline manual.
+We just declare expected artifacts and trigger the pipeline manually.
 
 .. image:: imgs/spinnaker-expected-artifacts.png
      :align: center
      :scale: 100%
+
+**NOTE:** We need to enalbe "Use Default Artifact", when we need trigger the pipeline manually
 
 Bake Manifest stage
 :::::::::::::::::::
