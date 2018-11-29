@@ -276,12 +276,12 @@ We just declare expected artifacts and trigger the pipeline manually.
      :align: center
      :scale: 100%
 
-**NOTE:** We need to enalbe "Use Default Artifact", when we need trigger the pipeline manually
+**NOTE:** We need to enable "Use Default Artifact", when we need trigger the pipeline manually
 
 Bake Manifest stage
 :::::::::::::::::::
 
-For example, we have a test Bake(Manifest) stage below
+For example, we have a test "Bake(Manifest)" stage below
 
 .. image:: imgs/spinnaker-bake.png
      :align: center
