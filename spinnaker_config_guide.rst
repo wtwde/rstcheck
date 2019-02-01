@@ -303,3 +303,4 @@ After the chart was baked by helm, we can configure a "Deploy(Manifest)" stage t
      :scale: 100%
 
 Once this pipeline runs completely, you can see every resource in your Helm chart get deployed.
+test mirror
